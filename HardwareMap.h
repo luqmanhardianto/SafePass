@@ -1,6 +1,6 @@
 #pragma once
 
-enum class DigitalInpu : uint8_t {
+enum class DigitalInput : uint8_t {
   DI1 = 0,
   DI2,
   DI3,
