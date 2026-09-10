@@ -3,7 +3,7 @@
 
 void InputManager::begin() {
   for (uint8_t i = 0; i < 8; i++) {
-    pinMode(DI_PINS[i], INPUT);
+    pinMode(DI_PINS[i], INPUT_PULLUP);
 
     rawState[i] = digitalRead(DI_PINS[i]);
     stableState[i] = rawState[i];
