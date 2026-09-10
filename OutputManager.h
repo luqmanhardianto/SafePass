@@ -12,4 +12,4 @@ public:
   bool readOutput(DigitalOutput output) const;
 private:
   uint8_t outputState = 0;
-}
+};
