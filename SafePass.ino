@@ -15,7 +15,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  bool di_1_state = io.readInput(DigitalInput::DI3);
+  bool di_1_state = io.readInput(DigitalInput::DI1);
   Serial.println(di_1_state);
   delay(1);
 }
