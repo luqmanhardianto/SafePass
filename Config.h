@@ -1,0 +1,11 @@
+#pragma once
+
+#define FIRMWARE_VERSION "0.1.0"
+
+#define INPUT_DEBOUNCE_MS 100
+#define UNLOCK_TIMEOUT_MS 5000
+
+#define TCA9554_ADDRESS 0x20
+
+#define I2C_SDA_PIN 42
+#define I2C_SCL_PIN 41
