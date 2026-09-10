@@ -7,7 +7,7 @@
 #include "Config.h"
 
 bool OutputManager::begin() {
-  Wire.begin(I2C_SDA, I2C_SCL_PIN);
+  Wire.begin(I2C_SDA_PIN, I2C_SCL_PIN);
 
   outputState = 0x00;
 
@@ -48,7 +48,7 @@ void OutputManager::writeOutput(DigitalOutput output, bool state) {
   if (state) {
     outputState |= (1 << bit);
   } else {
-    outputState &= ~(1 << bit)
+    outputState &= ~(1 << bit);
   }
 
   Wire.beginTransmission(TCA9554_ADDRESS);
