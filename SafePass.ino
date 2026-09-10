@@ -13,6 +13,8 @@ void setup() {
   // set DI1-8 to input
   input.begin();
 
+  output.begin();
+
   Serial.println();
   Serial.println("OutputManager test");
 
