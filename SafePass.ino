@@ -26,14 +26,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  bool di_1_state = input.readInput(DigitalInput::DI1);
-  if (di_1_state) {
-    output.writeOutput(DigitalOutput::DO1, !di_1_state);
-  } else {
-    output.writeOutput(DigitalOutput::DO1, !di_1_state);
-  }
-  Serial.print("DI1 : ");
-  Serial.print(di_1_state);
-  Serial.print(" | DO1 : ");
-  Serial.println(output.readOutput(DigitalOutput::DO1));
+  bool di1 = input.readInput(DigitalInput::DI1);
+  bool do1 = !di1;
+
+  output.writeOutput(DigitalOutput::DO1, do1);
 }
