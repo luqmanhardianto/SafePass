@@ -2,7 +2,6 @@
 
 #include <Arduino.h>
 #include "HardwareMap.h"
-#include "Config.h"
 
 class OutputManager {
 public:
