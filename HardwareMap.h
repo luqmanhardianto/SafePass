@@ -10,3 +10,7 @@ enum class DigitalInput : uint8_t {
   DI7,
   DI8
 };
+
+constexpr uint8_t DI_PINS[]={
+  4,5,6,7,8,9,10,11
+};
