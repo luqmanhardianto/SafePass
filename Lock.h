@@ -9,7 +9,7 @@
 
 class Lock {
 private:
-  uint8_t outputBit;
+  DigitalOutput output;
   bool locked = false;
 public:
   void begin(DigitalOutput output);
