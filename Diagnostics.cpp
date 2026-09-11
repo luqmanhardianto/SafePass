@@ -1,3 +1,4 @@
+#include "HardwareSerial.h"
 #include "esp32-hal.h"
 #include <sys/_stdint.h>
 #include "Diagnostics.h"
@@ -30,6 +31,11 @@ void Diagnostics::update() {
 }
 
 void Diagnostics::showInputState() {
+  if (input == nullptr) {
+  return;
+  }
+
+  Serial.print();
 }
 
 void Diagnostics::shwoOutputState() {
