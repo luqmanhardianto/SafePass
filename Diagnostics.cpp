@@ -5,3 +5,19 @@
 #include "OutputManager.h"
 #include "HardwareMap.h"
 #include "Config.h"
+
+void Diagnostics::begin(InputManager *inputManager, OutputManager *outputManager){
+
+}
+
+void Diagnostics::update(){
+
+}
+
+void Diagnostics::showInputState(){
+
+}
+
+void Diagnostics::shwoOutputState(){
+  
+}
