@@ -1,35 +1,20 @@
 #include "PushButton.h"
-#include "OutputManager.h"
 #include "HardwareMap.h"
 
 PushButton buttonA;
-
-OutputManager output;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   delay(500);
 
-  buttonA.begin()
-
-  output.begin();
-
-  Serial.println();
-  Serial.println("OutputManager test");
-
-  if (!output.begin()) {
-    Serial.println("error : tca9554 not detected");
-    return;
-  }
-
-  Serial.println("tca9554 initialized");
+  buttonA.begin(InputFunction::PUSHBUTTON_A);
+  Serial.print("pin buttonA :");
+  Serial.println(buttonA.getPin());
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  bool di1 = input.readInput(DigitalInput::DI1);
-  bool do1 = !di1;
-
-  output.writeOutput(DigitalOutput::DO1, do1);
+  buttonA.readState();
+  Serial.print("buttonA:");
+  Serial.println(buttonA.isPressed());
 }
