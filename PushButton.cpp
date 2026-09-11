@@ -32,7 +32,3 @@ void PushButton::readState() {
 bool PushButton::isPressed() const {
   return (stableButtonState == LOW);
 }
-
-uint8_t PushButton::getPin() const {
-  return pin;
-}
