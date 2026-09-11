@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Arduino.h>
-#include "HardwareMap.h"
 
 class InputManager {
 public:
