@@ -8,7 +8,7 @@ void setup() {
   Serial.begin(115200);
   delay(500);
 
-  buttonA.begin(InputFunction::PUSHBUTTON_A);
+  buttonA.begin(DigitalInput::DI1);
   Serial.print("pin buttonA :");
   Serial.println(buttonA.getPin());
 }

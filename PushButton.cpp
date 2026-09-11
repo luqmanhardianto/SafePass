@@ -4,8 +4,8 @@
 #include "HardwareMap.h"
 #include "PushButton.h"
 
-void PushButton::begin(InputFunction pin) {
-  this->pin = DI_PINS[static_cast<uint8_t>(pin)];
+void PushButton::begin(DigitalInput input) {
+  this->pin = DI_PINS[static_cast<uint8_t>(input)];
 
   pinMode(this->pin, INPUT_PULLUP);
 }
