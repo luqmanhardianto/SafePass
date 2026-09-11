@@ -1,14 +1,34 @@
+#include <sys/_types.h>
+
 #pragma once
 
 #include <Arduino.h>
+#include <sys/_stdint.h>
+#include "Config.h"
 
 class InputManager {
 public:
-  void begin();
+  void begin(uint8_t pin);
 
-  bool readInput(DigitalInput input);
+  void update();
+
+  void setPin(uint8_t pin);
+  uint8_t getPin() const;
+
+  void setDebounceTime(unsigned long timeMS);
+  unsigned long getDebounceTime() const;
+
+  bool getRawState() const;
+  bool getStableState() const;
+
+  bool isActive() const;
+  bool isInactive() const;
 private:
-  bool rawState[8];
-  bool stableState[8];
-  unsigned long lastChangeTime[8];
+  uint8_t pin = 0;
+
+  bool rawState = HIGH;
+  bool stableState = HIGH;
+
+  unsigned long lastChangeTime = 0;
+  unsigned long debounceTime = INPUT_DEBOUNCE_MS;
 };
