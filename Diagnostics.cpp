@@ -17,6 +17,16 @@ void Diagnostics::begin(
 }
 
 void Diagnostics::update() {
+  uint32_t now = millis();
+
+  if (now - lastStatusTime < DIAGNOSTICS_INTERVAL_MS){
+    return;
+  }
+
+  lastStatusTime = now;
+
+  showInputState();
+  shwoOutputState();
 }
 
 void Diagnostics::showInputState() {
