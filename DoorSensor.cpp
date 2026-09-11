@@ -26,6 +26,6 @@ void DoorSensor::readState() {
   lastDoorSensorState = currentDoorSensorState;
 }
 
-bool DoorSensor::isLocked() const {
+bool DoorSensor::isClosed() const {
   return stableDoorSensorState == LOW;
 }

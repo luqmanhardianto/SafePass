@@ -23,5 +23,5 @@ public:
 
   void readState();
 
-  bool isLocked() const;
+  bool isClosed() const;
 };
