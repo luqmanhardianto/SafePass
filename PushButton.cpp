@@ -2,30 +2,26 @@
 #include "esp32-hal-gpio.h"
 #include "PushButton.h"
 
-void PushButton::begin(DigitalInput input) {
-  inputChannel = input;
-  inputManager.begin();
-  this->inputPin = input;
-
-  state = HIGH;
+void PushButton::begin(uint8_t pin) {
+  input.begin(pin);
+  state = input.getStableState();
 }
 
 void PushButton::update() {
-  if (input == nullptr) {
-    return;
-  }
-
-  state = input->readInput(inputPin);
+  input.update();
+  state = input.getStableState();
 }
 
-DigitalInput PushButton::getInput() const {
-  return inputPin;
+uint8_t PushButton::getPin() const {
+  return input.getPin();
 }
 
 bool PushButton::getState() const {
   return state;
 }
-
 bool PushButton::isPressed() const {
-  return state == LOW;
+  return input.isActive();
+}
+bool PushButton::isReleased() const {
+  return input.isInactive();
 }

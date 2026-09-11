@@ -5,6 +5,7 @@
 #include <Arduino.h>
 #include <sys/_stdint.h>
 #include "Config.h"
+#include "HardwareMap.h"
 
 class InputManager {
 public:
@@ -24,7 +25,8 @@ public:
   bool isActive() const;
   bool isInactive() const;
 private:
-  uint8_t pin = 0;
+  // default configuration
+  uint8_t pin = DI_PINS[DigitalInput::DI1];
 
   bool rawState = HIGH;
   bool stableState = HIGH;
