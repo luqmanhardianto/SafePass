@@ -1,7 +1,8 @@
-#include "InputManager.h"
+#include "PushButton.h"
 #include "OutputManager.h"
+#include "HardwareMap.h"
 
-InputManager input;
+PushButton buttonA;
 
 OutputManager output;
 
@@ -10,8 +11,7 @@ void setup() {
   Serial.begin(115200);
   delay(500);
 
-  // set DI1-8 to input
-  input.begin();
+  buttonA.begin()
 
   output.begin();
 
