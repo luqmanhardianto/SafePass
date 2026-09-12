@@ -48,7 +48,7 @@ bool initializeTca9554() {
   // Start from a known safe software output state.
   sharedOutputState = 0x00;
 
-  if (!writeSharedOutputState()) {
+  if (!writeSharedOutputState(sharedOutputState)) {
     return false;
   }
 
@@ -62,7 +62,7 @@ bool Lock::begin(DigitalOutput output) {
   this->output = output;
   this->locked = false;
 
-  initializeTca9554();
+   return initializeTca9554();
 }
 
 void Lock::lock() {
