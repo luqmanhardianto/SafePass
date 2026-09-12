@@ -11,10 +11,6 @@ uint8_t sharedOutputState = 0x00;
 // The TCA9554 is shared by all Lock objects, so initialize it only once.
 bool tca9554Initialized = false;
 
-constexpr uint8_t TCA9554_REG_OUTPUT = 0x01;
-constexpr uint8_t TCA9554_REG_CONFIG = 0x03;
-constexpr uint8_t TCA9554_REG_POLARITY = 0x02;
-
 bool writeSharedOutputState() {
   Wire.beginTransmission(TCA9554_ADDRESS);
   Wire.write(TCA9554_REG_OUTPUT);
@@ -59,9 +55,9 @@ bool initializeTca9554() {
   return true;
 }
 
-} // namespace
+}  // namespace
 
-void Lock::begin(DigitalOutput output) {
+bool Lock::begin(DigitalOutput output) {
   this->output = output;
   this->locked = false;
 

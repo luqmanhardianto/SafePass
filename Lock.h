@@ -12,7 +12,7 @@ private:
   DigitalOutput output;
   bool locked = false;
 public:
-  void begin(DigitalOutput output);
+  bool begin(DigitalOutput output);
 
   void lock();
   void unlock();
