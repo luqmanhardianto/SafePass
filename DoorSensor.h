@@ -6,17 +6,11 @@
 
 #include "esp32-hal-gpio.h"
 #include "HardwareMap.h"
-#include "Config.h"
+#include "InputManager.h"
 
 class DoorSensor {
 private:
-  uint8_t pin;
-
-  bool lastDoorSensorState = HIGH;
-  bool stableDoorSensorState = HIGH;
-
-  unsigned long lastTimeStateChanged = 0;
-  unsigned long debounceTimeMs = INPUT_DEBOUNCE_MS;
+  InputManager input;
 
 public:
   void begin(DigitalInput input);
