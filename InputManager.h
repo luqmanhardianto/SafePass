@@ -15,7 +15,7 @@ private:
   unsigned long lastTimeStateChanged = 0;
   unsigned long debounceTimeMs = INPUT_DEBOUNCE_MS;
 public:
-  void begin();
+  void begin(DigitalInput input);
   void readState();
   bool isActive() const;
 };
