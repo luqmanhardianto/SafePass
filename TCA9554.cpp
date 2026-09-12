@@ -46,7 +46,30 @@ bool TCA9554::writeOutputState(uint8_t outputState) {
   return Wire.endTransmission() == 0;
 }
 
-bool TCA9554::setOutput(DigitalOutput output, bool state);
+bool TCA9554::setOutput(DigitalOutput output, bool state) {
+  if (!initialized) {
+    return false;
+  }
+
+  const uint8_t bit = static_cast<uint8_t>(output);
+
+  uint8_t newOutputState = sharedOutputState;
+
+  if (state) {
+    newOutputState |= (static_cast<uint8_t>(1U) << bit);
+  } else {
+    newOutputState &= ~(static_cast<uint8_t>(1U) << bit);
+  }
+
+  // only update the software stat after successful i2c transmission.
+  if (!writeOutputState(newOutputState)) {
+    return false;
+  }
+
+  sharedOutputState = newOutputState;
+  return true;
+}
+
 bool TCA9554::getOutput(DigitalOutput output) const {
   const uint8_t bit = static_cast<uint8_t>(output);
   return (sharedOutputState & (static_cast<uint8_t>(1U) << bit)) != 0;
