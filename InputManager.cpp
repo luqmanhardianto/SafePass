@@ -24,4 +24,6 @@ void InputManager::readState() {
   }
   lastInputState = currentInputState;
 }
-bool InputManager::isActive() const;
+bool InputManager::isActive() const {
+  return stableInputState == LOW;
+}
