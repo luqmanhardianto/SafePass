@@ -83,5 +83,5 @@ void loop() {
   pushButtonB.readState();
   doorSensorB.readState();
 
-  runLockTest();
+  // runLockTest();
 }
