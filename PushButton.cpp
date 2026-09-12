@@ -9,9 +9,9 @@ void PushButton::begin(DigitalInput input) {
 }
 
 void PushButton::readState() {
-  this->input.readState();
+  input.readState();
 }
 
 bool PushButton::isPressed() const {
-  return this->isPressed();
+  return input.isActive();
 }
