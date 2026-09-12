@@ -5,30 +5,13 @@
 #include "PushButton.h"
 
 void PushButton::begin(DigitalInput input) {
-  this->pin = DI_PINS[static_cast<uint8_t>(input)];
-
-  pinMode(this->pin, INPUT_PULLUP);
+  this->input.begin(input);
 }
 
 void PushButton::readState() {
-  // read current raw state of push button
-  bool currentButtonState = digitalRead(pin);
-
-  // if state buton change, reset debounce time
-  if (currentButtonState != lastButtonState) {
-    lastTimeStateChanged = millis();
-  }
-
-  if ((millis() - lastTimeStateChanged) > debounceTimeMs) {
-
-    if (currentButtonState != stableButtonState) {
-      stableButtonState = currentButtonState;
-    }
-  }
-
-  lastButtonState = currentButtonState;
+  this->input.readState();
 }
 
 bool PushButton::isPressed() const {
-  return (stableButtonState == LOW);
+  return this->isPressed();
 }

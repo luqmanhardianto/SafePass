@@ -3,18 +3,12 @@
 #include <Arduino.h>
 #include <sys/_stdint.h>
 
-#include "Config.h"
 #include "HardwareMap.h"
+#include "InputManager.h"
 
 class PushButton {
 private:
-  uint8_t pin;
-
-  bool lastButtonState = HIGH;
-  bool stableButtonState = HIGH;
-
-  unsigned long lastTimeStateChanged = 0;
-  unsigned long debounceTimeMs = INPUT_DEBOUNCE_MS;
+  InputManager input;
 public:
   void begin(DigitalInput input);
 
