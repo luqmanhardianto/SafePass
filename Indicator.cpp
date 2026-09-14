@@ -10,6 +10,17 @@ bool Indicator::begin(TCA9554 &tca9554, DigitalOutput output) {
   }
   return true;
 }
-bool Indicator::on();
+bool Indicator::on() {
+  if (tca9554 == nullptr) {
+    return false;
+  }
+
+  if (tca9554->setOutput(output, true)) {
+    onState = true;
+    return true;
+  }
+
+  return false;
+}
 bool Indicator::off();
 bool Indicator::isOn() const;
