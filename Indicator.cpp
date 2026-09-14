@@ -22,5 +22,16 @@ bool Indicator::on() {
 
   return false;
 }
-bool Indicator::off();
+bool Indicator::off() {
+  if (tca9554 == nullptr) {
+    return false;
+  }
+
+  if (!tca9554->setOutput(output, false)) {
+    onState = false;
+    return true;
+  }
+
+  return false;
+}
 bool Indicator::isOn() const;
