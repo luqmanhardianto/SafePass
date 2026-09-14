@@ -8,5 +8,7 @@ void Interlock::begin(Door &doorA, Door &doorB) {
 }
 
 void Interlock::update();
-Interlock::State Interlock::getState() const;
+Interlock::State Interlock::getState() const{
+  return state;
+}
 bool Interlock::isFault() const;
