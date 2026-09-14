@@ -42,6 +42,18 @@ void Interlock::update() {
         }
         break;
       }
+
+      // request Door B.
+      if (doorB->isButtonPressed()) {
+
+        if (doorA->isClosed() && doorB->isClosed() && doorA->isLocked()) {
+
+          if (doorB->unlock()) {
+            state = State::RELEASE_B;
+          }
+        }
+        break;
+      }
   }
 }
 
