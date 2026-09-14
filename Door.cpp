@@ -13,7 +13,9 @@ void Door::begin(
     this->greenIndicator= &greenIndicator;
   }
 
-bool Door::isButtonPressed() const;
+bool Door::isButtonPressed() const{
+  return pushButton->isPressed();
+}
 bool Door::isClosed() const;
 bool Door::isLocked() const;
 bool Door::isOpen() const;
