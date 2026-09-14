@@ -22,8 +22,19 @@ bool Lock::lock() {
     locked = true;
     return true;
   }
+  return false;
 }
-bool Lock::unlock();
+bool Lock::unlock() {
+  if (tca9554 == nullptr) {
+    return false;
+  }
+
+  if (tca9554->setOutput(output, false)) {
+    locked = false;
+    return true;
+  }
+  return false;
+}
 bool Lock::isLocked() const {
   return locked;
 }
