@@ -24,4 +24,6 @@ bool Door::isClosed() const{
 bool Door::isLocked() const{
   return lock->isLocked();
 }
-bool Door::isOpen() const;
+bool Door::isOpen() const{
+  return !doorSensor->isClosed();
+}
