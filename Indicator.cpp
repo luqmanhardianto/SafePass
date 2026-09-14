@@ -34,4 +34,6 @@ bool Indicator::off() {
 
   return false;
 }
-bool Indicator::isOn() const;
+bool Indicator::isOn() const{
+  return onState;
+}
