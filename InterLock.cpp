@@ -11,4 +11,7 @@ void Interlock::update();
 Interlock::State Interlock::getState() const{
   return state;
 }
-bool Interlock::isFault() const;
+
+bool Interlock::isFault() const{
+  return state == State::FAULT;
+}
