@@ -13,7 +13,16 @@ bool Lock::begin(TCA9554 &tca9554, DigitalOutput output) {
   return true;
 }
 
-bool Lock::lock();
+bool Lock::lock() {
+  if (tca9554 == nullptr) {
+    return false;
+  }
+
+  if (tca9554->setOutput(output, true)) {
+    locked = true;
+    return true;
+  }
+}
 bool Lock::unlock();
 bool Lock::isLocked() const {
   return locked;
