@@ -1,5 +1,6 @@
 #include "InterLock.h"
 #include "Config.h"
+#include "Door.h"
 
 void Interlock::begin(Door &doorA, Door &doorB) {
   this->doorA = &doorA;
@@ -27,6 +28,18 @@ void Interlock::update() {
       // both buttons pressed at the same time.
       // reject both requests.
       if (doorA->isButtonPressed() && doorB->isButtonPressed()) {
+        break;
+      }
+
+      // request Door A.
+      if (doorA->isButtonPressed()) {
+
+        if (doorA->isClosed() && doorB->isClosed() && doorB->isLocked()) {
+
+          if (doorA->unlock()) {
+            state = State::RELEASE_A;
+          }
+        }
         break;
       }
   }
