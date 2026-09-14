@@ -16,6 +16,9 @@ void Door::begin(
 bool Door::isButtonPressed() const{
   return pushButton->isPressed();
 }
-bool Door::isClosed() const;
+
+bool Door::isClosed() const{
+  return doorSensor->isClosed();
+}
 bool Door::isLocked() const;
 bool Door::isOpen() const;
