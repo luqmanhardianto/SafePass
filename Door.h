@@ -11,7 +11,7 @@ class Door {
 private:
   PushButton *pushButton;
   DoorSensor *doorSensor;
-  Lock *lock;
+  Lock *doorlock;
   Indicator *redIndicator;
   Indicator *greenIndicator;
 public:

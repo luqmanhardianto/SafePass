@@ -8,7 +8,7 @@ void Door::begin(
   Indicator &greenIndicator) {
   this->pushButton = &pushButton;
   this->doorSensor = &doorSensor;
-  this->lock = &lock;
+  this->doorlock = &lock;
   this->redIndicator = &redIndicator;
   this->greenIndicator = &greenIndicator;
 }
@@ -22,16 +22,16 @@ bool Door::isClosed() const {
 }
 
 bool Door::isLocked() const {
-  return lock->isLocked();
+  return doorlock->isLocked();
 }
 bool Door::isOpen() const {
   return !doorSensor->isClosed();
 }
 
 bool Door::lock(){
-  return lock->lock();
+  return doorlock->lock();
 }
 
 bool Door::unlock(){
-  return lock->unlock();
+  return doorlock->unlock();
 }
