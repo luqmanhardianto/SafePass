@@ -54,6 +54,7 @@ void Interlock::update() {
         }
         break;
       }
+      break;
   }
 }
 
