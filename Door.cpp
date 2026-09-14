@@ -32,4 +32,6 @@ bool Door::lock(){
   return lock->lock();
 }
 
-bool Door::unlock();
+bool Door::unlock(){
+  return lock->unlock();
+}
