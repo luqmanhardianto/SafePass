@@ -4,6 +4,7 @@
 #include "Lock.h"
 #include "Indicator.h"
 #include "TCA9554.h"
+#include "Door.h"
 
 // define Input object DoorA
 PushButton pushButtonA;
@@ -11,6 +12,7 @@ DoorSensor doorSensorA;
 Lock lockA;
 Indicator pilotLampGreenA;
 Indicator pilotLampRedA;
+Door doorA;
 
 // define Input object DoorB
 PushButton pushButtonB;
@@ -18,6 +20,7 @@ DoorSensor doorSensorB;
 Lock lockB;
 Indicator pilotLampGreenB;
 Indicator pilotLampRedB;
+Door doorB;
 
 // define TCA9554
 TCA9554 tca9554;
@@ -48,29 +51,33 @@ void setup() {
   pilotLampGreenB.begin(tca9554, DigitalOutput::DO6);
   pilotLampRedB.begin(tca9554, DigitalOutput::DO7);
 
-  Serial.println("SafePass Lock/TCA9554 test started");
+  doorA.begin(
+    pushButtonA,
+    doorSensorA,
+    lockA,
+    pilotLampRedA,
+    pilotLampGreenA);
+
+  doorB.begin(
+    pushButtonB,
+    doorSensorB,
+    lockB,
+    pilotLampRedB,
+    pilotLampGreenB);
 }
 
 void loop() {
   pushButtonA.readState();
-  if (pushButtonA.isPressed()) {
-    lockA.lock();
-    pilotLampRedA.on();
-    pilotLampGreenA.off();
-  } else {
-    lockA.unlock();
-    pilotLampRedA.off();
-    pilotLampGreenA.on();
-  }
+  doorSensorA.readState();
+  Serial.print("pbA: ");
+  Serial.print(doorA.isButtonPressed());
 
-  pushButtonB.readState();
-  if (pushButtonB.isPressed()) {
-    lockB.lock();
-    pilotLampRedB.on();
-    pilotLampGreenB.off();
-  } else {
-    lockB.unlock();
-    pilotLampRedB.off();
-    pilotLampGreenB.on();
-  }
+  Serial.print(" | closed: ");
+  Serial.print(doorA.isClosed());
+
+  Serial.print(" | open: ");
+  Serial.print(doorA.isOpen());
+
+  Serial.print(" | locked: ");
+  Serial.println(doorA.isLocked());
 }
