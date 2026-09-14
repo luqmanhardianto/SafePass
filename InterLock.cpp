@@ -21,6 +21,15 @@ void Interlock::update() {
     state = State::FAULT;
     return;
   }
+
+  switch (state) {
+    case State::IDLE:
+      // both buttons pressed at the same time.
+      // reject both requests.
+      if (doorA->isButtonPressed() && doorB->isButtonPressed()) {
+        break;
+      }
+  }
 }
 
 Interlock::State Interlock::getState() const {
