@@ -16,8 +16,8 @@ private:
 public:
   bool begin(TCA9554 &tca9554,DigitalOutput output);
 
-  void lock();
-  void unlock();
+  bool lock();
+  bool unlock();
 
   bool isLocked() const;
 };
