@@ -21,8 +21,6 @@ void Interlock::update() {
     state = State::FAULT;
     return;
   }
-
-  
 }
 
 Interlock::State Interlock::getState() const {

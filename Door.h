@@ -26,4 +26,7 @@ public:
   bool isClosed() const;
   bool isLocked() const;
   bool isOpen() const;
+
+  bool lock();
+  bool unlock();
 };
