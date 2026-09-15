@@ -27,8 +27,8 @@ void Interlock::update() {
     return;
   }
 
-  if (bothLocksUnlocked){
-    state=State::FAULT;
+  if (bothLocksUnlocked) {
+    state = State::FAULT;
     updateIndicators();
     return;
   }
@@ -116,6 +116,8 @@ void Interlock::update() {
       // recovery behavior will be defined later
       break;
   }
+
+  updateIndicators();
 }
 
 void Interlock::updateIndicators() {
