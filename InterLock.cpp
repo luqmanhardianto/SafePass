@@ -108,6 +108,20 @@ void Interlock::update() {
   }
 }
 
+void Interlock::updateIndicators() {
+  switch (state) {
+    case State::IDLE:
+
+      // both doors available
+      doorA->redOff();
+      doorA->greenOn();
+
+      doorB->redOff();
+      doorB->greenOn();
+      break;
+  }
+}
+
 Interlock::State Interlock::getState() const {
   return state;
 }
