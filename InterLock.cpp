@@ -20,6 +20,7 @@ void Interlock::update() {
 
   if (bothDoorsOpen) {
     state = State::FAULT;
+    updateIndicators();
     return;
   }
 
