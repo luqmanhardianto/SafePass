@@ -9,16 +9,16 @@ void Interlock::begin(Door &doorA, Door &doorB) {
 }
 
 void Interlock::update() {
-  // safety invariant:
+  // safety condition:
   // both doors must never be open at the same time.
   if (doorA->isOpen() && doorB->isOpen()) {
     state = State::FAULT;
     return;
   }
 
-  // safety invariant:
+  // safety condition:
   // both door must never be command unlocked at the same time.
-  if (doorA->isLocked() == false && doorB->isLocked() == false) {
+  if (!doorA->isLocked() && !doorB->isLocked()) {
     state = State::FAULT;
     return;
   }
