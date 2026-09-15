@@ -17,10 +17,18 @@ void Interlock::update() {
   bool bothDoorsOpen =
     doorA->isOpen() && doorB->isOpen();
 
+  bool bothLocksUnlocked =
+    !doorA->isLocked() && !doorB->isLocked();
+
 
   if (bothDoorsOpen) {
     state = State::FAULT;
     updateIndicators();
+    return;
+  }
+
+  if (bothLocksUnlocked){
+    state=State::FAULT;
     return;
   }
 
