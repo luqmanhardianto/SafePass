@@ -36,7 +36,10 @@ bool Door::unlock() {
   return doorlock->unlock();
 }
 
-bool Door::redOn();
+bool Door::redOn(){
+  return redIndicator->on();
+}
+
 bool Door::redOff();
 
 bool Door::greenOn();
