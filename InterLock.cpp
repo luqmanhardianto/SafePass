@@ -141,6 +141,16 @@ void Interlock::updateIndicators() {
       doorB->redOff();
       doorB->greenOn();
       break;
+
+    case State::FAULT:
+      // fault condition
+      // both doors unavailable
+      doorA->redOn();
+      doorA->greenOff();
+
+      doorB->redOn();
+      doorB->greenOff();
+      break;
   }
 }
 
