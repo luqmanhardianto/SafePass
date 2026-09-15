@@ -75,7 +75,16 @@ void Interlock::update() {
           state = State::IDLE;
         }
       }
-      
+
+      break;
+
+    case State::RELEASE_B:
+      // door B has been released
+      // wait for the physical door to open
+      if (doorB->isOpen()) {
+        state = State::DOOR_B_OPEN;
+      }
+
       break;
   }
 }
