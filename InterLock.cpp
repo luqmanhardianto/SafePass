@@ -86,6 +86,20 @@ void Interlock::update() {
       }
 
       break;
+
+    case State::DOOR_B_OPEN:
+
+      // door B is open
+      // door A cannot be released.
+      // wait until Door B closes
+      if (doorB->isClosed()) {
+
+        if (doorB->lock()) {
+          state = State::IDLE;
+        }
+      }
+
+      break;
   }
 }
 
