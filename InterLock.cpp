@@ -8,6 +8,8 @@ void Interlock::begin(Door &doorA, Door &doorB) {
   this->doorA = &doorA;
   this->doorB = &doorB;
   state = State::IDLE;
+
+  updateIndicators();
 }
 
 void Interlock::update() {
