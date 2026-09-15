@@ -22,6 +22,8 @@ private:
   Door *doorB;
   State state = State::IDLE;
 
+  void updateIndicators();
+
 public:
   void begin(Door &doorA, Door &doorB);
 
