@@ -29,4 +29,10 @@ public:
 
   bool lock();
   bool unlock();
+
+  bool redOn();
+  bool redOff();
+
+  bool greenOn();
+  bool greenOff();
 };

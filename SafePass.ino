@@ -137,30 +137,4 @@ void loop() {
   doorSensorB.readState();
 
   interlock.update();
-
-  static unsigned long lastPrintTime = 0;
-  if (millis() - lastPrintTime >= 500) {
-    lastPrintTime = millis();
-
-    Serial.print("PB-A: ");
-    Serial.print(pushButtonA.isPressed());
-
-    Serial.print(" | PB-B: ");
-    Serial.print(pushButtonB.isPressed());
-
-    Serial.print(" | A closed: ");
-    Serial.print(doorA.isClosed());
-
-    Serial.print(" | B closed: ");
-    Serial.print(doorB.isClosed());
-
-    Serial.print(" | A locked: ");
-    Serial.print(doorA.isLocked());
-
-    Serial.print(" | B locked: ");
-    Serial.print(doorB.isLocked());
-
-    Serial.print(" | State: ");
-    Serial.println(getStateName(interlock.getState()));
-  }
 }
