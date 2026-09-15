@@ -48,4 +48,6 @@ bool Door::greenOn(){
   return greenIndicator->on();
 }
 
-bool Door::greenOff();
+bool Door::greenOff(){
+  return greenIndicator->off();
+}
