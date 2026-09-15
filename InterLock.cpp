@@ -29,6 +29,7 @@ void Interlock::update() {
 
   if (bothLocksUnlocked){
     state=State::FAULT;
+    updateIndicators();
     return;
   }
 
