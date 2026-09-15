@@ -11,7 +11,6 @@
 class DoorSensor {
 private:
   InputManager input;
-
 public:
   void begin(DigitalInput input);
 

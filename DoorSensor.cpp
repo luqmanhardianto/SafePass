@@ -6,11 +6,11 @@
 
 void DoorSensor::begin(DigitalInput input) {
   this->input.begin(input);
-
+  this->input.readState();
 }
 
 void DoorSensor::readState() {
-input.readState();
+  input.readState();
 }
 
 bool DoorSensor::isClosed() const {

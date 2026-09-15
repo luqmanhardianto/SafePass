@@ -63,10 +63,12 @@ void setup() {
 
   // Init digital inputs.
   pushButtonA.begin(DigitalInput::DI1);
-  doorSensorA.begin(DigitalInput::DI2);
-
   pushButtonB.begin(DigitalInput::DI5);
+
+  doorSensorA.begin(DigitalInput::DI2);
   doorSensorB.begin(DigitalInput::DI6);
+
+  delay(150);
 
   // init digital output
   if (!lockA.begin(tca9554, DigitalOutput::DO1)) {
@@ -134,25 +136,17 @@ void loop() {
   doorSensorA.readState();
   doorSensorB.readState();
 
-  // print state
-  static Interlock::State lastState = Interlock::State::FAULT;
-  if (interlock.getState() != lastState) {
-    lastState = interlock.getState();
-    Serial.print("interlock State: ");
-    Serial.println(getStateName(lastState));
-  }
-
   interlock.update();
 
-  static unsigned long lastPrint = 0;
-  if (millis() - lastPrint >= 500) {
-    lastPrint = millis();
+  static unsigned long lastPrintTime = 0;
+  if (millis() - lastPrintTime >= 500) {
+    lastPrintTime = millis();
 
-    Serial.print("pbA: ");
-    Serial.print(doorA.isButtonPressed());
+    Serial.print("PB-A: ");
+    Serial.print(pushButtonA.isPressed());
 
-    Serial.print(" | pbB: ");
-    Serial.print(doorB.isButtonPressed());
+    Serial.print(" | PB-B: ");
+    Serial.print(pushButtonB.isPressed());
 
     Serial.print(" | A closed: ");
     Serial.print(doorA.isClosed());
@@ -165,7 +159,6 @@ void loop() {
 
     Serial.print(" | B locked: ");
     Serial.print(doorB.isLocked());
-
 
     Serial.print(" | State: ");
     Serial.println(getStateName(interlock.getState()));

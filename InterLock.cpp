@@ -12,48 +12,14 @@ void Interlock::begin(Door &doorA, Door &doorB) {
 
 void Interlock::update() {
 
-  // debug
   bool bothDoorsOpen =
     doorA->isOpen() && doorB->isOpen();
 
-  bool bothLocksUnlocked =
-    !doorA->isLocked() && !doorB->isLocked();
 
   if (bothDoorsOpen) {
     state = State::FAULT;
     return;
   }
-
-  if (bothLocksUnlocked) {
-    state = State::FAULT;
-    return;
-  }
-  // Serial.print("DEBUG A open: ");
-  // Serial.print(doorA->isOpen());
-
-  // Serial.print(" | B open: ");
-  // Serial.print(doorB->isOpen());
-
-  // Serial.print(" | A locked: ");
-  // Serial.print(doorA->isLocked());
-
-  // Serial.print(" | B locked: ");
-  // Serial.println(doorB->isLocked());
-
-
-  // safety condition:
-  // both doors must never be open at the same time.
-  // if (doorA->isOpen() && doorB->isOpen()) {
-  //   state = State::FAULT;
-  //   return;
-  // }
-
-  // safety condition:
-  // both door must never be command unlocked at the same time.
-  // if (!doorA->isLocked() && !doorB->isLocked()) {
-  //   state = State::FAULT;
-  //   return;
-  // }
 
   switch (state) {
     case State::IDLE:
