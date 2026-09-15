@@ -54,7 +54,16 @@ void Interlock::update() {
         }
         break;
       }
+
+      break;
       
+    case State::RELEASE_A:
+      // door A has ben released.
+      // wait for the physical door to open.
+      if (doorA->isOpen()) {
+        state = State::DOOR_A_OPEN;
+      }
+
       break;
   }
 }
