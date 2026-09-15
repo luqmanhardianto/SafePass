@@ -28,10 +28,16 @@ bool Door::isOpen() const {
   return !doorSensor->isClosed();
 }
 
-bool Door::lock(){
+bool Door::lock() {
   return doorlock->lock();
 }
 
-bool Door::unlock(){
+bool Door::unlock() {
   return doorlock->unlock();
 }
+
+bool Door::redOn();
+bool Door::redOff();
+
+bool Door::greenOn();
+bool Door::greenOff();
