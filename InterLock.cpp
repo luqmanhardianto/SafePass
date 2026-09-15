@@ -100,6 +100,11 @@ void Interlock::update() {
       }
 
       break;
+
+    case State::FAULT:
+      // stay in FAULT for now
+      // recovery behavior will be defined later
+      break;
   }
 }
 
