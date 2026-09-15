@@ -40,7 +40,9 @@ bool Door::redOn(){
   return redIndicator->on();
 }
 
-bool Door::redOff();
+bool Door::redOff(){
+  return redIndicator->off();
+}
 
 bool Door::greenOn();
 bool Door::greenOff();
