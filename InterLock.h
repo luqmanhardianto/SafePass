@@ -24,6 +24,13 @@ private:
 
   void updateIndicators();
 
+  // fault indicator blinking
+  unsigned long faultIndicatorLastToggleTime = 0;
+  bool faultIndicatorBlinkState = false;
+
+  // helpoer fault indicator
+  void updateFaultIndicators();
+
 public:
   void begin(Door &doorA, Door &doorB);
 
