@@ -166,6 +166,10 @@ void Interlock::updateIndicators() {
   }
 }
 
+void Interlock::updateFaultIndicators(){
+  
+}
+
 Interlock::State Interlock::getState() const {
   return state;
 }
