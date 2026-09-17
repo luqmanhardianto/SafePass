@@ -116,6 +116,7 @@ void Interlock::update() {
     case State::FAULT:
       // stay in FAULT for now
       // recovery behavior will be defined later
+      updateFaultIndicators();
       break;
   }
 
