@@ -1,3 +1,5 @@
+#include "esp32-hal.h"
+#include <sys/_types.h>
 #include "HardwareSerial.h"
 #include "InterLock.h"
 #include "Config.h"
@@ -166,8 +168,31 @@ void Interlock::updateIndicators() {
   }
 }
 
-void Interlock::updateFaultIndicators(){
-  
+void Interlock::updateFaultIndicators() {
+  bool doorASafe =
+    doorA->isClosed() && doorA->isLocked();
+
+  bool doorBSafe =
+    doorB->isClosed() && doorB->isLocked();
+
+  unsigned long currentTime = millis();
+
+  if (currentTime - faultIndicatorLastToggleTime >= FAULT_INDICATOR_BLINK_MS) {
+    faultIndicatorLastToggleTime = currentTime;
+    faultIndicatorBlinkState = !faultIndicatorBlinkState;
+  }
+
+  // door A fault indication
+  if (doorASafe) {
+    if (faultIndicatorBlinkState) {
+      doorA->redOn();
+    } else {
+      doorA->redOff();
+    }
+
+  } else {
+    doorA->redOn();
+  }
 }
 
 Interlock::State Interlock::getState() const {
