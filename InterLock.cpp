@@ -205,6 +205,10 @@ void Interlock::updateFaultIndicators() {
   } else {
     doorB->redOn();
   }
+
+  // green indicator ar disabled durinf fault
+  doorA->greenOff();
+  doorB->greenOff();
 }
 
 Interlock::State Interlock::getState() const {
