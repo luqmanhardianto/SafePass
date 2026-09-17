@@ -193,6 +193,18 @@ void Interlock::updateFaultIndicators() {
   } else {
     doorA->redOn();
   }
+
+  // door B fault indication
+  if (doorBSafe) {
+    if (faultIndicatorBlinkState) {
+      doorB->redOn();
+    } else {
+      doorB->greenOff();
+    }
+
+  } else {
+    doorB->redOn();
+  }
 }
 
 Interlock::State Interlock::getState() const {
