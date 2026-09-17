@@ -116,11 +116,13 @@ void Interlock::update() {
     case State::FAULT:
       // stay in FAULT for now
       // recovery behavior will be defined later
-      updateFaultIndicators();
       break;
   }
-
-  updateIndicators();
+  if (state == State::FAULT) {
+    updateFaultIndicators();
+  } else {
+    updateIndicators();
+  }
 }
 
 void Interlock::updateIndicators() {
@@ -178,7 +180,7 @@ void Interlock::updateFaultIndicators() {
 
   unsigned long currentTime = millis();
 
-  if (currentTime - faultIndicatorLastToggleTime >= FAULT_INDICATOR_BLINK_MS) {
+  if ((currentTime - faultIndicatorLastToggleTime) >= FAULT_INDICATOR_BLINK_MS) {
     faultIndicatorLastToggleTime = currentTime;
     faultIndicatorBlinkState = !faultIndicatorBlinkState;
   }
@@ -200,7 +202,7 @@ void Interlock::updateFaultIndicators() {
     if (faultIndicatorBlinkState) {
       doorB->redOn();
     } else {
-      doorB->greenOff();
+      doorB->redOff();
     }
 
   } else {
