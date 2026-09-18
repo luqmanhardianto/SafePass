@@ -57,6 +57,10 @@ void Interlock::update() {
         if (doorA->isClosed() && doorB->isClosed() && doorB->isLocked()) {
 
           if (doorA->unlock()) {
+
+            unlockStartTime = millis();
+            unlockTiming = true;
+
             state = State::RELEASE_A;
           }
         }
@@ -70,6 +74,10 @@ void Interlock::update() {
         if (doorA->isClosed() && doorB->isClosed() && doorA->isLocked()) {
 
           if (doorB->unlock()) {
+
+            unlockStartTime = millis();
+            unlockTiming = true;
+
             state = State::RELEASE_B;
           }
         }
