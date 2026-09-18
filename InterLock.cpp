@@ -171,6 +171,27 @@ void Interlock::updateIndicators() {
   }
 }
 
+void Interlock::enterFault() {
+  // prevent repeated fault-entry actions
+  if (state == State::FAULT) {
+    return;
+  }
+
+  // command both doors to locked state
+  doorA->lock();
+  doorB->lock();
+
+  // enter latched fault state
+  state = State::FAULT;
+
+  // reset fault indicator blinking
+  faultIndicatorLastToggleTime = millis();
+  faultIndicatorBlinkState = false;
+
+  // apply fault indication
+  updateFaultIndicators();
+}
+
 void Interlock::updateFaultIndicators() {
   bool doorASafe =
     doorA->isClosed() && doorA->isLocked();
