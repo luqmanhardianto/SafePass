@@ -126,7 +126,21 @@ void Interlock::update() {
       // door B has been released
       // wait for the physical door to open
       if (doorB->isOpen()) {
+
+        unlockTiming = false;
+        unlockStartTime = 0;
+
         state = State::DOOR_B_OPEN;
+        break;
+      }
+
+      if (unlockTiming && millis() - unlockStartTime >= UNLOCK_TIMEOUT_MS) {
+        doorB->lock();
+
+        unlockTiming = false;
+        unlockStartTime = 0;
+
+        state = State::IDLE;
       }
 
       break;
