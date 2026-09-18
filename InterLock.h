@@ -34,6 +34,10 @@ private:
   bool faultResetTiming = false;
   bool faultResetWaitForRelease = false;
 
+  // unlock timeout
+  unsigned long unlockStartTime = 0;
+  bool unlockTiming = false;
+
   // internal func helper
   void enterFault();
   void updateIndicators();
