@@ -18,22 +18,28 @@ public:
   };
 
 private:
+  // door object
   Door *doorA;
   Door *doorB;
-  
+
+  // default state
   State state = State::IDLE;
 
-  void updateIndicators();
+
 
   // fault indicator blinking
   unsigned long faultIndicatorLastToggleTime = 0;
   bool faultIndicatorBlinkState = false;
 
-  // helper fault indicator
-  void updateFaultIndicators();
+  // fault reset timing
+  unsigned long faultRestStartTime = 0;
+  bool faultResetTiming = false;
+  bool faultResetWaitForRelease = false;
 
+  // internal func helper
   void enterFault();
-
+  void updateIndicators();
+  void updateFaultIndicators();
 public:
   void begin(Door &doorA, Door &doorB);
 
