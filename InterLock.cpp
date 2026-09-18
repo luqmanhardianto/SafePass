@@ -234,6 +234,56 @@ void Interlock::updateFaultIndicators() {
   doorB->greenOff();
 }
 
+void Interlock::updateFaultReset() {
+  // if reset already happened, wait for both buttons
+  // to be released before allowing another reset
+  if (faultResetWaitForRelease) {
+
+    if (!doorA->isButtonPressed() && doorB->isButtonPressed()) {
+      faultResetWaitForRelease = false;
+    }
+
+    return;
+  }
+
+  bool bothButtonsPressed =
+    doorA->isButtonPressed() && doorB->isButtonPressed();
+
+  // start reset timing
+  if (bothButtonsPressed && !faultResetTiming) {
+    faultRestStartTime = millis();
+    faultResetTiming = true;
+  }
+
+  // cancel timing if either button is released
+  if (!bothButtonsPressed && faultResetTiming) {
+    faultResetTiming = false;
+    faultRestStartTime = 0;
+  }
+
+  // check whether both buttons have been held long enough
+  if (bothButtonsPressed && faultResetTiming) {
+
+    if (millis() - faultRestStartTime >= FAULT_RESET_HOLD_MS) {
+
+      faultResetTiming = false;
+      faultRestStartTime = 0;
+
+      bool doorASafe =
+        doorA->isClosed() && doorA->isLocked();
+
+      bool doorBSafe =
+        doorB->isClosed() && doorB->isLocked();
+
+      // reset is allowed only when both doors are safe
+      if (doorASafe && doorBSafe) {
+        state = State::IDLE;
+        faultResetWaitForRelease = true;
+      }
+    }
+  }
+}
+
 Interlock::State Interlock::getState() const {
   return state;
 }
