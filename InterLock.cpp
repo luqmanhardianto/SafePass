@@ -26,13 +26,11 @@ void Interlock::update() {
   if (bothDoorsOpen) {
     state = State::FAULT;
     enterFault();
-    return;
   }
 
   if (bothLocksUnlocked) {
     state = State::FAULT;
     enterFault();
-    return;
   }
 
   switch (state) {
@@ -187,9 +185,6 @@ void Interlock::enterFault() {
   // reset fault indicator blinking
   faultIndicatorLastToggleTime = millis();
   faultIndicatorBlinkState = false;
-
-  // apply fault indication
-  updateFaultIndicators();
 }
 
 void Interlock::updateFaultIndicators() {
@@ -205,6 +200,10 @@ void Interlock::updateFaultIndicators() {
     faultIndicatorLastToggleTime = currentTime;
     faultIndicatorBlinkState = !faultIndicatorBlinkState;
   }
+
+  // green indicators are always off during FAULT
+  doorA->greenOff();
+  doorB->greenOff();
 
   // door A fault indication
   if (doorASafe) {
