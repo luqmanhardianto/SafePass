@@ -100,12 +100,15 @@ void Interlock::update() {
       }
 
       if (unlockTiming && millis() - unlockStartTime >= UNLOCK_TIMEOUT_MS) {
-        doorA->lock();
 
         unlockTiming = false;
         unlockStartTime = 0;
 
-        state = State::IDLE;
+        if (doorA->lock()) {
+          state = State::IDLE;
+        } else {
+          enterFault();
+        }
       }
 
       break;
@@ -135,12 +138,14 @@ void Interlock::update() {
       }
 
       if (unlockTiming && millis() - unlockStartTime >= UNLOCK_TIMEOUT_MS) {
-        doorB->lock();
 
         unlockTiming = false;
         unlockStartTime = 0;
-
-        state = State::IDLE;
+        if (doorB->lock()) {
+          state = State::IDLE;
+        } else {
+          enterFault();
+        }
       }
 
       break;
