@@ -25,8 +25,6 @@ private:
   // default state
   State state = State::IDLE;
 
-
-
   // fault indicator blinking
   unsigned long faultIndicatorLastToggleTime = 0;
   bool faultIndicatorBlinkState = false;
@@ -40,6 +38,7 @@ private:
   void enterFault();
   void updateIndicators();
   void updateFaultIndicators();
+  void updateFaultReset();
 public:
   void begin(Door &doorA, Door &doorB);
 
