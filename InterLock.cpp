@@ -25,13 +25,13 @@ void Interlock::update() {
 
   if (bothDoorsOpen) {
     state = State::FAULT;
-    updateIndicators();
+    enterFault();
     return;
   }
 
   if (bothLocksUnlocked) {
     state = State::FAULT;
-    updateIndicators();
+    enterFault();
     return;
   }
 
