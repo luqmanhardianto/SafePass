@@ -20,6 +20,7 @@ public:
 private:
   Door *doorA;
   Door *doorB;
+  
   State state = State::IDLE;
 
   void updateIndicators();
@@ -28,8 +29,10 @@ private:
   unsigned long faultIndicatorLastToggleTime = 0;
   bool faultIndicatorBlinkState = false;
 
-  // helpoer fault indicator
+  // helper fault indicator
   void updateFaultIndicators();
+
+  void enterFault();
 
 public:
   void begin(Door &doorA, Door &doorB);
