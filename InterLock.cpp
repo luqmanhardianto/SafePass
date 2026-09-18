@@ -35,6 +35,16 @@ void Interlock::update() {
 
   switch (state) {
     case State::IDLE:
+      // ignore button requests until both buttons
+      // used for fault reset have been released.
+      if (faultResetWaitForRelease) {
+        if (!doorA->isButtonPressed() && !doorB->isButtonPressed()) {
+          faultResetWaitForRelease = false;
+        }
+
+        break;
+      }
+
       // both buttons pressed at the same time.
       // reject both requests.
       if (doorA->isButtonPressed() && doorB->isButtonPressed()) {
@@ -50,6 +60,7 @@ void Interlock::update() {
             state = State::RELEASE_A;
           }
         }
+
         break;
       }
 
@@ -62,6 +73,7 @@ void Interlock::update() {
             state = State::RELEASE_B;
           }
         }
+
         break;
       }
 
