@@ -40,6 +40,10 @@ private:
   unsigned long unlockStartTime = 0;
   bool unlockTiming = false;
 
+  // lock confirmation timeout
+  unsigned long lockCOnfirmStartTime = 0;
+  bool lockConfirmTiming = false;
+
   // internal func helper
   void enterFault();
   void updateIndicators();
