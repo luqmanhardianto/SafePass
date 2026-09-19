@@ -12,8 +12,10 @@ public:
     IDLE,
     RELEASE_A,
     DOOR_A_OPEN,
+    WAIT_LOCK_A,
     RELEASE_B,
     DOOR_B_OPEN,
+    WAIT_LOCK_B,
     FAULT
   };
 
