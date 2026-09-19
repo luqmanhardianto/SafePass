@@ -17,7 +17,7 @@ void Interlock::begin(Door &doorA, Door &doorB) {
 void Interlock::update() {
 
   bool bothDoorsOpen =
-    doorA->isOpen() && doorB->isOpen();
+    doorA->isPhsicallyUnlocked() && doorB->isPhsicallyUnlocked();
 
   bool bothLocksUnlocked =
     !doorA->isLocked() && !doorB->isLocked();
