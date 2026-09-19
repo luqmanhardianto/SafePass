@@ -105,7 +105,6 @@ void setup() {
 
   Serial.println("interlock init");
   Serial.println("state :");
-  // Serial.println(getStateName(interlock.getState()));
 }
 
 void loop() {
@@ -116,8 +115,6 @@ void loop() {
 
   lockStatusA.readState();
   lockStatusB.readState();
-
-  Serial.println(lockStatusA.isLocked());
 
   interlock.update();
 }
