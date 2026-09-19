@@ -9,6 +9,16 @@ void InputManager::begin(DigitalInput input) {
   this->pin = DI_PINS[static_cast<uint8_t>(input)];
 
   pinMode(pin, INPUT_PULLUP);
+  
+  // initialize state from the actual input level
+  lastInputState = digitalRead(pin);
+  stableInputState = lastInputState;
+
+// initialize deboune timing
+lastTimeStateChanged=millis();
+
+// run one normal state update
+  readState();
 }
 void InputManager::readState() {
   bool currentInputState = digitalRead(pin);
