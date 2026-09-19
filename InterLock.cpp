@@ -89,7 +89,7 @@ void Interlock::update() {
     case State::RELEASE_A:
       // door A has ben released.
       // wait for the physical door to open.
-      if (doorA->isOpen()) {
+      if (doorA->isPhysicallyUnlocked()) {
 
         unlockTiming = false;
         unlockStartTime = 0;
