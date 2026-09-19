@@ -41,7 +41,7 @@ private:
   bool unlockTiming = false;
 
   // lock confirmation timeout
-  unsigned long lockCOnfirmStartTime = 0;
+  unsigned long lockConfirmStartTime = 0;
   bool lockConfirmTiming = false;
 
   // internal func helper

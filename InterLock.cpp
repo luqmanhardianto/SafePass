@@ -127,7 +127,7 @@ void Interlock::update() {
       if (!lockConfirmTiming) {
 
         if (doorA->lock()) {
-          lockCOnfirmStartTime = millis();
+          lockConfirmStartTime = millis();
           lockConfirmTiming = true;
         } else {
           enterFault();
@@ -138,15 +138,15 @@ void Interlock::update() {
 
       if (doorA->isPhysicallyLocked()) {
         lockConfirmTiming = false;
-        lockCOnfirmStartTime = 0;
+        lockConfirmStartTime = 0;
 
         state = State::IDLE;
         break;
       }
 
-      if (millis() - lockCOnfirmStartTime >= LOCK_CONFIRM_TIMEOUT_MS) {
+      if (millis() - lockConfirmStartTime >= LOCK_CONFIRM_TIMEOUT_MS) {
         lockConfirmTiming = false;
-        lockCOnfirmStartTime = 0;
+        lockConfirmStartTime = 0;
 
         enterFault();
       }
@@ -196,7 +196,7 @@ void Interlock::update() {
 
         if (doorB->lock()) {
 
-          lockCOnfirmStartTime = millis();
+          lockConfirmStartTime = millis();
           lockConfirmTiming = true;
         } else {
           enterFault();
@@ -208,16 +208,16 @@ void Interlock::update() {
       if (doorB->isPhysicallyLocked()) {
 
         lockConfirmTiming = false;
-        lockCOnfirmStartTime = 0;
+        lockConfirmStartTime = 0;
 
         state = State::IDLE;
         break;
       }
 
-      if (millis() - lockCOnfirmStartTime >= LOCK_CONFIRM_TIMEOUT_MS) {
+      if (millis() - lockConfirmStartTime >= LOCK_CONFIRM_TIMEOUT_MS) {
 
         lockConfirmTiming = false;
-        lockCOnfirmStartTime = 0;
+        lockConfirmStartTime = 0;
 
         enterFault();
       }
@@ -351,7 +351,7 @@ void Interlock::updateFaultReset() {
   // to be released before allowing another reset
   if (faultResetWaitForRelease) {
 
-    if (!doorA->isButtonPressed() && doorB->isButtonPressed()) {
+    if (!doorA->isButtonPressed() && !doorB->isButtonPressed()) {
       faultResetWaitForRelease = false;
     }
 
