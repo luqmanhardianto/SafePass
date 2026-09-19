@@ -249,6 +249,7 @@ void Interlock::updateIndicators() {
 
     case State::RELEASE_A:
     case State::DOOR_A_OPEN:
+    case State::WAIT_LOCK_A:
       // door A is active
       // door B is unavailable
       doorA->redOff();
@@ -260,6 +261,7 @@ void Interlock::updateIndicators() {
 
     case State::RELEASE_B:
     case State::DOOR_B_OPEN:
+    case State::WAIT_LOCK_B:
       // door B is active
       // door A is unavailable
       doorA->redOn();
