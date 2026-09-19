@@ -17,19 +17,17 @@ void Interlock::begin(Door &doorA, Door &doorB) {
 void Interlock::update() {
 
   bool bothDoorsOpen =
-    doorA->isPhsicallyUnlocked() && doorB->isPhsicallyUnlocked();
+    doorA->isPhysicallyUnlocked() && doorB->isPhysicallyUnlocked();
 
   bool bothLocksUnlocked =
     !doorA->isLocked() && !doorB->isLocked();
 
 
   if (bothDoorsOpen) {
-    state = State::FAULT;
     enterFault();
   }
 
   if (bothLocksUnlocked) {
-    state = State::FAULT;
     enterFault();
   }
 
@@ -38,6 +36,7 @@ void Interlock::update() {
       // ignore button requests until both buttons
       // used for fault reset have been released.
       if (faultResetWaitForRelease) {
+
         if (!doorA->isButtonPressed() && !doorB->isButtonPressed()) {
           faultResetWaitForRelease = false;
         }
@@ -54,8 +53,8 @@ void Interlock::update() {
       // request Door A.
       if (doorA->isButtonPressed()) {
 
-        if (doorA->isClosed() && doorB->isClosed() && doorB->isLocked()) {
-
+        if (doorA->isPhysicallyLocked() && doorB->isPhysicallyLocked()) {
+          
           if (doorA->unlock()) {
 
             unlockStartTime = millis();
