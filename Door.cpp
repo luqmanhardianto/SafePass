@@ -25,7 +25,7 @@ bool Door::isLocked() const {
   return doorlock->isLocked();
 }
 bool Door::isPhysicallyUnlocked() const {
-  return !lockStatus->isLocked();
+  return lockStatus->isUnlocked();
 }
 
 bool Door::lock() {
