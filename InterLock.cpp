@@ -70,7 +70,7 @@ void Interlock::update() {
       // request Door B.
       if (doorB->isButtonPressed()) {
 
-        if (doorA->isClosed() && doorB->isClosed() && doorA->isLocked()) {
+        if (doorA->isPhysicallyLocked() && doorB->isPhysicallyLocked()) {
 
           if (doorB->unlock()) {
 
