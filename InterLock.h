@@ -11,9 +11,9 @@ public:
   enum class State : uint8_t {
     IDLE,
     RELEASE_A,
-    UNLOCKED_A,
+    DOOR_A_OPEN,
     RELEASE_B,
-    UNLOCKED_B,
+    DOOR_B_OPEN,
     FAULT
   };
 
