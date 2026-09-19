@@ -3,29 +3,32 @@
 #include <Arduino.h>
 
 #include "PushButton.h"
-#include "DoorSensor.h"
+#include "LockStatus.h"
 #include "Lock.h"
 #include "Indicator.h"
 
 class Door {
 private:
   PushButton *pushButton;
-  DoorSensor *doorSensor;
+  LockStatus *lockStatus;
   Lock *doorlock;
   Indicator *redIndicator;
   Indicator *greenIndicator;
 public:
   void begin(
     PushButton &pushButton,
-    DoorSensor &doorSensor,
+    LockStatus &lockStatus,
     Lock &lock,
     Indicator &redIndicator,
     Indicator &greenIndicator);
 
   bool isButtonPressed() const;
-  bool isClosed() const;
+
+  bool isPhysicallyLocked() const;
+  bool isPhysicallyUnlocked() const;
+
+
   bool isLocked() const;
-  bool isOpen() const;
 
   bool lock();
   bool unlock();

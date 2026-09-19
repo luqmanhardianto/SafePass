@@ -2,12 +2,12 @@
 
 void Door::begin(
   PushButton &pushButton,
-  DoorSensor &doorSensor,
+  LockStatus &lockStatus,
   Lock &lock,
   Indicator &redIndicator,
   Indicator &greenIndicator) {
   this->pushButton = &pushButton;
-  this->doorSensor = &doorSensor;
+  this->lockStatus = &lockStatus;
   this->doorlock = &lock;
   this->redIndicator = &redIndicator;
   this->greenIndicator = &greenIndicator;
@@ -17,15 +17,15 @@ bool Door::isButtonPressed() const {
   return pushButton->isPressed();
 }
 
-bool Door::isClosed() const {
-  return doorSensor->isClosed();
+bool Door::isPhysicallyLocked() const {
+  return lockStatus->isLocked();
 }
 
 bool Door::isLocked() const {
   return doorlock->isLocked();
 }
-bool Door::isOpen() const {
-  return !doorSensor->isClosed();
+bool Door::isPhysicallyUnlocked() const {
+  return !lockStatus->isLocked();
 }
 
 bool Door::lock() {
@@ -36,18 +36,18 @@ bool Door::unlock() {
   return doorlock->unlock();
 }
 
-bool Door::redOn(){
+bool Door::redOn() {
   return redIndicator->on();
 }
 
-bool Door::redOff(){
+bool Door::redOff() {
   return redIndicator->off();
 }
 
-bool Door::greenOn(){
+bool Door::greenOn() {
   return greenIndicator->on();
 }
 
-bool Door::greenOff(){
+bool Door::greenOff() {
   return greenIndicator->off();
 }
