@@ -123,6 +123,34 @@ void Interlock::update() {
       break;
 
     case State::WAIT_LOCK_A:
+
+      if (!lockConfirmTiming) {
+
+        if (doorA->lock()) {
+          lockCOnfirmStartTime = millis();
+          lockConfirmTiming = true;
+        } else {
+          enterFault();
+        }
+
+        break;
+      }
+
+      if (doorA->isPhysicallyLocked()) {
+        lockConfirmTiming = false;
+        lockCOnfirmStartTime = 0;
+
+        state = State::IDLE;
+        break;
+      }
+
+      if (millis() - lockCOnfirmStartTime >= LOCK_CONFIRM_TIMEOUT_MS) {
+        lockConfirmTiming = false;
+        lockCOnfirmStartTime = 0;
+
+        enterFault();
+      }
+
       break;
 
     case State::RELEASE_B:
@@ -163,6 +191,7 @@ void Interlock::update() {
       break;
 
     case State::WAIT_LOCK_B:
+    }
       break;
 
     case State::FAULT:
