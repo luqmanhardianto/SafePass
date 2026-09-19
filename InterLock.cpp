@@ -116,13 +116,8 @@ void Interlock::update() {
       // door A is open
       // door B cannot be released
       // wait until Door A closes
-      if (doorA->isPhysicallyUnlocked()) {
-
-        if (doorA->lock()) {
-          state = State::IDLE;
-        } else {
-          enterFault();
-        }
+      if (doorA->isPhysicallyLocked()) {
+        state = State::WAIT_LOCK_A;
       }
 
       break;
@@ -161,13 +156,8 @@ void Interlock::update() {
       // door B is open
       // door A cannot be released.
       // wait until Door B closes
-      if (doorB->isPhysicallyUnlocked()) {
-
-        if (doorB->lock()) {
-          state = State::IDLE;
-        } else {
-          enterFault();
-        }
+      if (doorB->isPhysicallyLocked()) {
+        state = State::WAIT_LOCK_B;
       }
 
       break;
