@@ -53,7 +53,7 @@ void Interlock::update() {
       // request Door A.
       if (doorA->isButtonPressed()) {
 
-        if (doorA->isPhysicallyLocked() && doorB->isPhysicallyLocked()) {
+        if (doorA->isPhysicallyLocked() && doorB->isPhysicallyLocked() && doorA->isLocked()) {
 
           if (doorA->unlock()) {
 
@@ -70,7 +70,7 @@ void Interlock::update() {
       // request Door B.
       if (doorB->isButtonPressed()) {
 
-        if (doorA->isPhysicallyLocked() && doorB->isPhysicallyLocked()) {
+        if (doorA->isPhysicallyLocked() && doorB->isPhysicallyLocked() && doorB->isLocked()) {
 
           if (doorB->unlock()) {
 
@@ -246,10 +246,10 @@ void Interlock::enterFault() {
 
 void Interlock::updateFaultIndicators() {
   bool doorASafe =
-    doorA->isClosed() && doorA->isLocked();
+    doorA->isPhysicallyLocked();
 
   bool doorBSafe =
-    doorB->isClosed() && doorB->isLocked();
+    doorB->isPhysicallyLocked();
 
   unsigned long currentTime = millis();
 
