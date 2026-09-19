@@ -6,7 +6,6 @@
 
 void LockStatus::begin(DigitalInput input) {
   this->input.begin(input);
-  this->input.readState();
 }
 
 void LockStatus::readState() {
