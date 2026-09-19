@@ -127,6 +127,9 @@ void Interlock::update() {
 
       break;
 
+    case State::WAIT_LOCK_A:
+      break;
+
     case State::RELEASE_B:
       // door B has been released
       // wait for the physical door to open
@@ -158,7 +161,7 @@ void Interlock::update() {
       // door B is open
       // door A cannot be released.
       // wait until Door B closes
-      if (doorB->isPhysicallyLocked()) {
+      if (doorB->isPhysicallyUnlocked()) {
 
         if (doorB->lock()) {
           state = State::IDLE;
@@ -167,6 +170,9 @@ void Interlock::update() {
         }
       }
 
+      break;
+
+    case State::WAIT_LOCK_B:
       break;
 
     case State::FAULT:
@@ -327,10 +333,10 @@ void Interlock::updateFaultReset() {
       faultRestStartTime = 0;
 
       bool doorASafe =
-        doorA->isClosed() && doorA->isLocked();
+        doorA->isPhysicallyLocked() && doorA->isLocked();
 
       bool doorBSafe =
-        doorB->isClosed() && doorB->isLocked();
+        doorB->isPhysicallyLocked() && doorB->isLocked();
 
       // reset is allowed only when both doors are safe
       if (doorASafe && doorBSafe) {
