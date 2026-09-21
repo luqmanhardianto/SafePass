@@ -33,6 +33,13 @@ void Interlock::update() {
 
   switch (state) {
     case State::IDLE:
+
+      // both door must be physically locked in IDLE
+      if (!doorA->isPhysicallyLocked() || !doorB->isPhysicallyLocked()) {
+        enterFault();
+        break;
+      }
+      
       // ignore button requests until both buttons
       // used for fault reset have been released.
       if (faultResetWaitForRelease) {
